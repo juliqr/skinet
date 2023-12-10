@@ -9,7 +9,7 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        
+
         private readonly IProductRepository _repo;
         public ProductsController(IProductRepository repo)
         {
@@ -28,5 +28,21 @@ namespace API.Controllers
             return await _repo.GetProductByIdAsync(id);
 
         }
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+        {
+            return Ok(await _repo.GetProductsBrandAsync());
+
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
+            return Ok(await _repo.GetProductsTypesAsync());
+
+        }
+
+
     }
 }
